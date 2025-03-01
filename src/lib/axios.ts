@@ -3,7 +3,7 @@ import axios, { Method } from "axios";
 
 
 const axiosInstance = axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com/",
+  baseURL: "http://localhost:8000/api/v1/",
   withCredentials: true,
 });
 
@@ -19,10 +19,11 @@ export const apiRequest = async <T = any>(
   data?: any
 ): Promise<ApiResponse<T>> => {
   try {
+    console.log("request")
     const isFormData = data instanceof FormData;
 
-    // const token = store.getState().auth.token; 
-    const token = "1234678"
+    
+    const token = localStorage.getItem("hclauthtoken");
 
     const response = await axiosInstance.request<T>({
       method,
